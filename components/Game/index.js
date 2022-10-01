@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Spinner } from "../UI/Spinner";
 
 export const List = ({ data: games }) => {
@@ -24,10 +25,15 @@ const Title = ({ children }) => (
   </h4>
 );
 
-const SubTitle = ({ name, cloneOf }) => {
+const SubTitle = ({ name, cloneOf, onClick }) => {
   return (
     <h5 className="font-bold tracking-tight text-gray-900 dark:text-gray-400">
-      {name} {cloneOf && `(Clone of: ${cloneOf})`}
+      {name}{" "}
+      {cloneOf && (
+        <a href="#" onClick={onClick}>
+          (clone of: {cloneOf})
+        </a>
+      )}
     </h5>
   );
 };
@@ -74,17 +80,31 @@ const RomInformation = ({ data }) => {
 };
 
 export const Game = (prop) => {
+  const router = useRouter();
   const [expand, setExpand] = useState(false);
+
+  const handleCloneOf = (value) => {
+    router.push({ query: { q: value } });
+  };
 
   console.log(prop.info);
 
   return (
     <Card onClick={() => setExpand(!expand)}>
       <Title>{prop.description}</Title>
-      <SubTitle name={prop.name} cloneOf={prop.cloneof} />
+      <SubTitle
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          handleCloneOf(prop.cloneof);
+        }}
+        name={prop.name}
+        cloneOf={prop.cloneof}
+      />
       <Publisher>
         {prop.publisher} ({prop.year})
       </Publisher>
+
       {expand && (
         <div className="mt-2 border-t-2 border-t-gray-600 pt-2">
           {/*{prop.info && <Info data={prop.info} />}*/}
