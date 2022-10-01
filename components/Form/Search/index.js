@@ -30,7 +30,6 @@ export const Search = ({ id, name, onInput }) => {
           onInput={onInput}
           type="search"
           placeholder="Search id or title"
-          required
         />
         <Button type="submit">Search</Button>
       </div>

@@ -11,6 +11,7 @@
   "dependencies": {
     "@fontsource/fira-sans": "^4.5.8",
     "@fontsource/lato": "^4.5.9",
+    "@react-hook/debounce": "^4.0.0",
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.7",
     "next": "12.1.6",
