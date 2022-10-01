@@ -29,9 +29,10 @@ const Home = () => {
     if (router.query.q) {
       setQuery(router.query.q);
     }
+    if (router.query.page) {
+      setPage(router.query.page);
+    }
   }, [router]);
-
-  console.log(page);
 
   return (
     <Layout>
