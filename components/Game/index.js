@@ -6,7 +6,7 @@ export const List = ({ data: games }) => {
 
   if (games.length <= 0) return <div>Princess must go by another name :(</div>;
 
-  return games.map((item) => <Game key={item.name} {...item} />);
+  return games.map((item) => item.name && <Game key={item.name} {...item} />);
 };
 
 const Card = ({ children, onClick }) => (
@@ -20,18 +20,37 @@ const Card = ({ children, onClick }) => (
 );
 
 const Title = ({ children }) => (
-  <h5 className="font-bold tracking-tight text-gray-900 dark:text-white">
+  <h4 className="font-bold tracking-tight text-gray-900 dark:text-white">
     {children}
-  </h5>
+  </h4>
+);
+
+const SubTitle = ({ name, cloneOf }) => {
+  return (
+    <h5 className="font-bold tracking-tight text-gray-900 dark:text-gray-400">
+      {name} {cloneOf && `(Clone of: ${cloneOf})`}
+    </h5>
+  );
+};
+
+const Publisher = ({ children }) => (
+  <small className="font-bold tracking-tight text-rose-500 dark:text-rose-500">
+    {children}
+  </small>
 );
 
 export const Game = (prop) => {
   const [expand, setExpand] = useState(false);
 
+  console.log(prop);
+
   return (
     <Card onClick={() => setExpand(!expand)}>
       <Title>{prop.description}</Title>
-      <small>{prop.name}</small>
+      <SubTitle name={prop.name} cloneOf={prop.cloneof} />
+      <Publisher>
+        {prop.publisher} ({prop.year})
+      </Publisher>
       {expand && (
         <p className="font-normal text-gray-700 dark:text-gray-400">...</p>
       )}
