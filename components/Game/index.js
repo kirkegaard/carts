@@ -44,6 +44,33 @@ const Publisher = ({ children }) => (
   </small>
 );
 
+const Information = ({ data }) => {
+  return (
+    <div>
+      <h5 className="text-xl font-bold text-rose-500">Information:</h5>
+      <ul className="ml-2">
+        {data.length ? (
+          data.map((item) => (
+            <li>
+              <span className="font-bold capitalize text-gray-400">
+                {item.name}:
+              </span>{" "}
+              {item.value}
+            </li>
+          ))
+        ) : (
+          <li>
+            <span className="font-bold capitalize text-gray-400">
+              {data.name}:
+            </span>{" "}
+            {data.value}
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+};
+
 const FeatureInformation = ({ data }) => {
   return (
     <div>
@@ -107,7 +134,11 @@ export const Game = (prop) => {
 
       {expand && (
         <div className="mt-2 border-t-2 border-t-gray-600 pt-2">
-          {/*{prop.info && <Info data={prop.info} />}*/}
+          {prop.info && (
+            <div className="my-2">
+              <Information data={prop.info} />
+            </div>
+          )}
 
           {prop.part.dataarea.rom && (
             <div className="my-2">
