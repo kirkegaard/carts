@@ -11,7 +11,7 @@ import { Game, List as GameList } from "../components/Game";
 const Home = () => {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useDebounce("", 200);
+  const [query, setQuery] = useDebounce("", 300);
   const { data, error } = useSWR(`/api/search?q=${query}&page=${page}`);
 
   const handleSubmit = (event) => {
