@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 
 import { Layout } from "../components/UI/Layout";
+import { Search } from "../components/Form/Search";
 
 const Home = () => {
+  const handler = (event) => {
+    event.preventDefault();
+    console.log(event.target.q.value);
+  };
+
   return (
     <Layout>
-      <div className="mx-auto my-10 max-w-lg p-4">
-        <h1>Gameboy cart information</h1>
+      <div className="p-4">
+        <Search onChange={handler} onSubmit={handler} />
       </div>
     </Layout>
   );
