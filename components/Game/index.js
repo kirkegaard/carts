@@ -78,7 +78,7 @@ const Information = ({ data }) => {
 const FeatureInformation = ({ data }) => {
   return (
     <div>
-      <h5 className="text-xl font-bold text-rose-500">Feature data:</h5>
+      <h5 className="text-xl font-bold text-rose-500">Feature:</h5>
       <ul className="ml-2">
         {data.map((item, index) => (
           <li key={index}>
@@ -94,7 +94,7 @@ const FeatureInformation = ({ data }) => {
 const RomInformation = ({ data }) => {
   return (
     <div>
-      <h5 className="text-xl font-bold text-rose-500">Rom data:</h5>
+      <h5 className="text-xl font-bold text-rose-500">Rom:</h5>
       <ul className="ml-2">
         <li>
           <span className="font-bold text-gray-400">Name:</span> {data.name}
