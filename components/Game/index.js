@@ -54,8 +54,8 @@ const Information = ({ data }) => {
       <h5 className="text-xl font-bold text-rose-500">Information:</h5>
       <ul className="ml-2">
         {data.length ? (
-          data.map((item) => (
-            <li>
+          data.map((item, index) => (
+            <li key={index}>
               <span className="font-bold capitalize text-gray-400">
                 {item.name}:
               </span>{" "}

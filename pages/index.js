@@ -33,12 +33,12 @@ const Home = () => {
     if (router.query.page) {
       setPage(router.query.page);
     }
-  }, [router]);
+  }, [router, setQuery]);
 
   return (
     <Layout>
       <div className="mx-auto w-full max-w-screen-md p-4">
-        <form className="mb-2" onSubmit={handleSubmit} className="text-right">
+        <form className="mb-2 text-right" onSubmit={handleSubmit}>
           <Search name="q" onInput={handleInput} />
           <button
             onClick={() => {
