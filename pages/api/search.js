@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   const { q } = req.query;
 
   if (!q) {
-    return res.status(400).json({ error: "Missing query" });
+    return res.status(200).json({ data: data.softwarelist.software });
   }
 
   const filteredData = data.softwarelist.software.filter((game) => {

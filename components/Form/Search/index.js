@@ -2,7 +2,7 @@ import { Button } from "../Button";
 import { Input } from "../Input";
 import { Label } from "../Label";
 
-export const Search = ({ onSubmit, onChange }) => {
+export const Search = ({ id, name, onInput }) => {
   return (
     <div className="w-full">
       <Label htmlFor="search">Search</Label>
@@ -25,10 +25,11 @@ export const Search = ({ onSubmit, onChange }) => {
           </svg>
         </div>
         <Input
+          id={id || name}
+          name={name}
+          onInput={onInput}
           type="search"
-          name="q"
-          id="default-search"
-          placeholder="Search Mockups, Logos..."
+          placeholder="Search id or title"
           required
         />
         <Button type="submit">Search</Button>
