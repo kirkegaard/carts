@@ -30,9 +30,13 @@ const SubTitle = ({ name, cloneOf, onClick }) => {
     <h5 className="font-bold tracking-tight text-gray-900 dark:text-gray-400">
       {name}{" "}
       {cloneOf && (
-        <a href="#" onClick={onClick}>
-          (clone of: {cloneOf})
-        </a>
+        <>
+          (clone of:{" "}
+          <a href="#" onClick={onClick}>
+            {cloneOf}
+          </a>
+          )
+        </>
       )}
     </h5>
   );
@@ -113,8 +117,6 @@ export const Game = (prop) => {
   const handleCloneOf = (value) => {
     router.push({ query: { q: value } });
   };
-
-  console.log(prop.info);
 
   return (
     <Card onClick={() => setExpand(!expand)}>
