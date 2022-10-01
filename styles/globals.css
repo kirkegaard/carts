@@ -36,7 +36,7 @@
 
   a {
     @apply font-bold text-red-600 no-underline decoration-sky-50 decoration-2 transition duration-300 ease-in-out hover:text-red-400;
-    @apply dark:text-sky-300 dark:hover:text-sky-100;
+    @apply dark:text-amber-400 dark:hover:text-amber-100;
   }
 
   hr {

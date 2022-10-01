@@ -4,13 +4,15 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 
 import { Layout } from "../components/UI/Layout";
+import { Pagination } from "../components/UI/Pagination";
 import { Search } from "../components/Form/Search";
 import { Game, List as GameList } from "../components/Game";
 
 const Home = () => {
   const router = useRouter();
+  const [page, setPage] = useState(1);
   const [query, setQuery] = useDebounce("", 200);
-  const { data, error } = useSWR(`/api/search?q=${query}`);
+  const { data, error } = useSWR(`/api/search?q=${query}&page=${page}`);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +31,8 @@ const Home = () => {
     }
   }, [router]);
 
+  console.log(page);
+
   return (
     <Layout>
       <div className="mx-auto w-full max-w-screen-md p-4">
@@ -37,6 +41,10 @@ const Home = () => {
         </form>
 
         <div className="grid gap-2">{!error && <GameList {...data} />}</div>
+
+        {data?.pagination && (
+          <Pagination setPage={setPage} {...data.pagination} />
+        )}
       </div>
     </Layout>
   );
