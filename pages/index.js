@@ -31,7 +31,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="mx-auto w-full max-w-screen-xl p-4">
+      <div className="mx-auto w-full max-w-screen-md p-4">
         <form className="mb-2" onSubmit={handleSubmit}>
           <Search name="q" onInput={handleInput} />
         </form>

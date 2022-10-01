@@ -10,13 +10,12 @@ export const List = ({ data: games }) => {
 };
 
 const Card = ({ children, onClick }) => (
-  <a
-    href="#"
+  <div
     onClick={onClick}
-    className="rounded-lg border border-gray-200 bg-white p-4 shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+    className="cursor-pointer rounded-lg border border-gray-200 bg-white p-4 shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
   >
     {children}
-  </a>
+  </div>
 );
 
 const Title = ({ children }) => (
@@ -39,10 +38,45 @@ const Publisher = ({ children }) => (
   </small>
 );
 
+const FeatureInformation = ({ data }) => {
+  return (
+    <div>
+      <h5 className="text-xl font-bold text-rose-500">Feature data:</h5>
+      <ul className="ml-2">
+        {data.map((item, index) => (
+          <li key={index}>
+            <span className="font-bold text-gray-400">{item.name}:</span>{" "}
+            {item.value}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const RomInformation = ({ data }) => {
+  return (
+    <div>
+      <h5 className="text-xl font-bold text-rose-500">Rom data:</h5>
+      <ul className="ml-2">
+        <li>
+          <span className="font-bold text-gray-400">Name:</span> {data.name}
+        </li>
+        <li>
+          <span className="font-bold text-gray-400">CRC:</span> {data.crc}
+        </li>
+        <li>
+          <span className="font-bold text-gray-400">SHA1:</span> {data.sha1}
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export const Game = (prop) => {
   const [expand, setExpand] = useState(false);
 
-  console.log(prop);
+  console.log(prop.info);
 
   return (
     <Card onClick={() => setExpand(!expand)}>
@@ -52,7 +86,21 @@ export const Game = (prop) => {
         {prop.publisher} ({prop.year})
       </Publisher>
       {expand && (
-        <p className="font-normal text-gray-700 dark:text-gray-400">...</p>
+        <div className="mt-2 border-t-2 border-t-gray-600 pt-2">
+          {/*{prop.info && <Info data={prop.info} />}*/}
+
+          {prop.part.dataarea.rom && (
+            <div className="my-2">
+              <RomInformation data={prop.part.dataarea.rom} />
+            </div>
+          )}
+
+          {prop.part.feature?.length && (
+            <div className="my-2">
+              <FeatureInformation data={prop.part.feature} />
+            </div>
+          )}
+        </div>
       )}
     </Card>
   );
