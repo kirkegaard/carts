@@ -38,8 +38,17 @@ const Home = () => {
   return (
     <Layout>
       <div className="mx-auto w-full max-w-screen-md p-4">
-        <form className="mb-2" onSubmit={handleSubmit}>
+        <form className="mb-2" onSubmit={handleSubmit} className="text-right">
           <Search name="q" onInput={handleInput} />
+          <button
+            onClick={() => {
+              setPage(1);
+              setQuery("");
+            }}
+            className="my-2 rounded-lg bg-zinc-800 py-1 px-2 text-xs hover:bg-rose-500"
+          >
+            Reset
+          </button>
         </form>
 
         <div className="grid gap-2">{!error && <GameList {...data} />}</div>
