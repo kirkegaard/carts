@@ -22,6 +22,7 @@ const Home = () => {
 
   const handleInput = ({ target }) => {
     router.push({ query: { q: target.value } });
+    setPage(1);
     setQuery(target.value);
   };
 
