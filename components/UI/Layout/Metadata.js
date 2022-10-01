@@ -1,8 +1,8 @@
 import Head from "next/head";
 
-const DEFAULT_TITLE = "Gameboy cart information";
-const DEFAULT_DESCRIPTION = "Foobar";
-const DEFAULT_KEYWORDS = "Online portfolio";
+const DEFAULT_TITLE = "GBA Cart data";
+const DEFAULT_DESCRIPTION = "A registery of GBA cart data";
+const DEFAULT_KEYWORDS = "Gameboy advance cart data";
 
 const DEFAULT_THEME_COLOR = "#FF0000";
 
