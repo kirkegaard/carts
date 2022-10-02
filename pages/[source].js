@@ -17,13 +17,12 @@ const List = ({ source }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const target = event.target.q;
-    handleChange({ target });
+    handleInput({ target });
   };
 
-  const handleChange = ({ target }) => {
+  const handleInput = ({ target }) => {
     setPage(1);
     setQuery(target.value);
-    router.replace({ query: { source, q: target.value } });
   };
 
   const handleReset = () => {
@@ -31,6 +30,10 @@ const List = ({ source }) => {
     setQuery("");
     router.replace({ query: { source } });
   };
+
+  useEffect(() => {
+    router.replace({ query: { source, q: query } });
+  }, [query]);
 
   useEffect(() => {
     if (router.query.q) {
@@ -45,7 +48,7 @@ const List = ({ source }) => {
     <Layout>
       <div className="mx-auto w-full max-w-screen-md p-4">
         <form onSubmit={handleSubmit}>
-          <Search name="q" onChange={handleChange} />
+          <Search name="q" onInput={handleInput} />
         </form>
         <div className="text-right">
           <button

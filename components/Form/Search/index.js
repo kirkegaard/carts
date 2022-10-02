@@ -2,7 +2,7 @@ import { Button } from "../Button";
 import { Input } from "../Input";
 import { Label } from "../Label";
 
-export const Search = ({ id, query, name, onChange }) => {
+export const Search = ({ id, query, name, onInput }) => {
   return (
     <div className="w-full">
       <Label htmlFor="search">Search</Label>
@@ -27,7 +27,7 @@ export const Search = ({ id, query, name, onChange }) => {
         <Input
           id={id || name}
           name={name}
-          onChange={onChange}
+          onInput={onInput}
           type="search"
           placeholder="Search id, title or pcb"
         />
