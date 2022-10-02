@@ -39,7 +39,7 @@ const List = ({ source }) => {
     if (router.query.page) {
       setPage(router.query.page);
     }
-  }, [router]);
+  }, [router, setQuery]);
 
   return (
     <Layout>
