@@ -9,7 +9,7 @@ const DEFAULT_THEME_COLOR = "#FF0000";
 const DEFAULT_TWITTER_SITE = "@ranza";
 const DEFAULT_TWITTER_CREATOR = "@ranza";
 
-const DEFAULT_FB_IMAGE_URL = "/favicon192.png";
+const DEFAULT_FB_IMAGE_URL = "/favicon.ico";
 const DEFAULT_FB_IMAGE_MIME_TYPE = "image/png";
 const DEFAULT_FB_IMAGE_HEIGHT = 192;
 const DEFAULT_FB_IMAGE_WIDTH = 192;
@@ -73,9 +73,9 @@ const Metadata = ({
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="da" />
 
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon192.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon192.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon192.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
       <link rel="manifest" href="/manifest.json" />
       <link
         rel="mask-icon"

@@ -10,7 +10,7 @@ const App = ({ Component, pageProps, err }) => {
           fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <Component {...{ pageProps, err }} />
+      <Component {...{ ...pageProps, err }} />
     </SWRConfig>
   );
 };

@@ -115,7 +115,7 @@ export const Game = (prop) => {
   const [expand, setExpand] = useState(false);
 
   const handleCloneOf = (value) => {
-    router.push({ query: { q: value, page: 1 } });
+    router.push({ query: { ...router.query, q: value, page: 1 } });
   };
 
   return (
