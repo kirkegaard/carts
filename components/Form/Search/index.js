@@ -29,7 +29,7 @@ export const Search = ({ id, query, name, onChange }) => {
           name={name}
           onChange={onChange}
           type="search"
-          placeholder="Search id or title"
+          placeholder="Search id, title or pcb"
         />
         <Button type="submit">Search</Button>
       </div>
