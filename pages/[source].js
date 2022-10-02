@@ -28,12 +28,13 @@ const List = ({ source }) => {
   const handleReset = () => {
     setPage(1);
     setQuery("");
-    router.replace({ query: { source } });
   };
 
   useEffect(() => {
-    router.replace({ query: { source, q: query } });
-  }, [query]);
+    if (query !== router.query.q) {
+      router.replace({ query: { source, q: query } });
+    }
+  }, [router, source, query]);
 
   useEffect(() => {
     if (router.query.q) {
