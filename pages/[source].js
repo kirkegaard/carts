@@ -51,7 +51,9 @@ const List = ({ source, query: initialQuery, page: initialPage }) => {
           </button>
         </div>
 
-        <div className="grid gap-2">{!error && <GameList {...data} />}</div>
+        <div className="grid gap-2">
+          {!error && <GameList setQuery={handleInput} {...data} />}
+        </div>
 
         {data?.pagination && (
           <Pagination setPage={setPage} {...data.pagination} />

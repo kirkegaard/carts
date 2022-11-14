@@ -2,19 +2,19 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { Spinner } from "../UI/Spinner";
 
-export const List = ({ data: games }) => {
+export const List = ({ setQuery, data: games }) => {
   if (!games) return <Spinner />;
 
   if (games.length <= 0) return <div>Princess must go by another name :(</div>;
 
-  return games.map((item) => item.name && <Game key={item.name} {...item} />);
+  return games.map(
+    (item) =>
+      item.name && <Game setQuery={setQuery} key={item.name} {...item} />
+  );
 };
 
-const Card = ({ children, onClick }) => (
-  <div
-    onClick={onClick}
-    className="cursor-pointer rounded-lg border border-gray-200 bg-white p-4 shadow-md hover:bg-gray-100 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-rose-500 dark:hover:bg-zinc-800"
-  >
+const Card = ({ children }) => (
+  <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-md hover:bg-gray-100 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-rose-500 dark:hover:bg-zinc-800">
     {children}
   </div>
 );
@@ -110,29 +110,29 @@ const RomInformation = ({ data }) => {
   );
 };
 
-export const Game = (prop) => {
+export const Game = ({ setQuery, ...prop }) => {
   const router = useRouter();
   const [expand, setExpand] = useState(false);
 
-  const handleCloneOf = (value) => {
-    router.push({ query: { ...router.query, q: value, page: 1 } });
-  };
+  const handleCloneOf = (value) => setQuery({ target: { value } });
 
   return (
-    <Card onClick={() => setExpand(!expand)}>
-      <Title>{prop.description}</Title>
-      <SubTitle
-        onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          handleCloneOf(prop.cloneof);
-        }}
-        name={prop.name}
-        cloneOf={prop.cloneof}
-      />
-      <Publisher>
-        {prop.publisher} ({prop.year})
-      </Publisher>
+    <Card>
+      <div className="cursor-pointer" onClick={() => setExpand(!expand)}>
+        <Title>{prop.description}</Title>
+        <SubTitle
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            handleCloneOf(prop.cloneof);
+          }}
+          name={prop.name}
+          cloneOf={prop.cloneof}
+        />
+        <Publisher>
+          {prop.publisher} ({prop.year})
+        </Publisher>
+      </div>
 
       {expand && (
         <div className="mt-2 border-t-2 border-t-gray-600 pt-2">
