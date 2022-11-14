@@ -8,11 +8,14 @@ import { Pagination } from "../components/UI/Pagination";
 import { Search } from "../components/Form/Search";
 import { Game, List as GameList } from "../components/Game";
 
-const List = ({ source }) => {
+const List = ({ source, query: initialQuery, page: initialPage }) => {
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useDebounce("", 300);
-  const { data, error } = useSWR(`/api/${source}?q=${query}&page=${page}`);
+  const [page, setPage] = useState(initialPage);
+  const [query, setQuery] = useState(initialQuery);
+  const [debouncedQuery, setDebouncedQuery] = useDebounce("", 500);
+  const { data, error } = useSWR(
+    `/api/${source}?q=${debouncedQuery}&page=${page}`
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +26,7 @@ const List = ({ source }) => {
   const handleInput = ({ target }) => {
     setPage(1);
     setQuery(target.value);
+    router.replace({ query: { source, page, query: target.value } });
   };
 
   const handleReset = () => {
@@ -30,26 +34,13 @@ const List = ({ source }) => {
     setQuery("");
   };
 
-  useEffect(() => {
-    if (query !== router.query.q) {
-      router.replace({ query: { source, q: query } });
-    }
-  }, [router, source, query]);
-
-  useEffect(() => {
-    if (router.query.q) {
-      setQuery(router.query.q);
-    }
-    if (router.query.page) {
-      setPage(router.query.page);
-    }
-  }, [router, setQuery]);
+  useEffect(() => setDebouncedQuery(query), [query]);
 
   return (
     <Layout>
       <div className="mx-auto w-full max-w-screen-md p-4">
         <form onSubmit={handleSubmit}>
-          <Search name="q" onInput={handleInput} />
+          <Search name="q" value={query} onChange={handleInput} />
         </form>
         <div className="text-right">
           <button
@@ -71,9 +62,14 @@ const List = ({ source }) => {
 };
 
 export async function getServerSideProps(context) {
-  const { source } = context.query;
+  const { source, query, page } = context.query;
+
   return {
-    props: { source },
+    props: {
+      source: source || "gb",
+      query: query || "",
+      page: page || 1,
+    },
   };
 }
 

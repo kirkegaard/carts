@@ -33,9 +33,7 @@ export default async function handler(req, res) {
       } else if (game.part?.feature) {
         const feature = game.part.feature;
         if (feature.length) {
-          const pcb = feature.find(
-            (f) => f.name === "pcb" && f.value.toLowerCase().includes(q)
-          );
+          const pcb = feature.find((f) => f.value?.toLowerCase().includes(q));
           if (pcb) return game;
         }
       }
